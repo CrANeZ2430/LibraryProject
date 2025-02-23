@@ -6,7 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Application.Domain.Books.Queries.GetAnimals;
 
-public class GetAnimalsQueryHandler(LibraryDbContext dbContext) 
+public class GetBooksQueryHandler(
+    LibraryDbContext dbContext) 
     : IRequestHandler<GetBooksQuery, PageResponse<BookDto[]>>
 {
     public async Task<PageResponse<BookDto[]>> Handle(
