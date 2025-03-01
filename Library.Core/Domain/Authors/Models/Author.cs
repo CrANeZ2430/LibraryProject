@@ -1,9 +1,12 @@
-﻿using Library.Core.Domain.Authors.Data;
+﻿using Library.Core.Common.Validation;
+using Library.Core.Domain.Authors.Checkers;
+using Library.Core.Domain.Authors.Data;
+using Library.Core.Domain.Authors.Validators;
 using Library.Core.Domain.Books.Models;
 
 namespace Library.Core.Domain.Authors.Models;
 
-public class Author
+public class Author : Entity
 {
     private readonly List<BookAuthor> _books = new();
 
@@ -23,8 +26,10 @@ public class Author
     public string Email { get; private set; }
     public IReadOnlyCollection<BookAuthor> Books => _books.AsReadOnly();
 
-    public static Author Create(CreateAuthorData data)
+    public static async Task<Author> Create(CreateAuthorData data, IEmailMustBeUniqueChecker emailMustBeUniqueChecker)
     {
+        await ValidateAsync(new CreateAuthorDataValidator(emailMustBeUniqueChecker), data);
+
         return new Author(
             Guid.NewGuid(),
             data.FirstName,

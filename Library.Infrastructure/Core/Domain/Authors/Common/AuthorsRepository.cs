@@ -3,7 +3,7 @@ using Library.Core.Domain.Authors.Models;
 using Library.Persistence.LibraryDb;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.Infrastructure.Core.Domain;
+namespace Library.Infrastructure.Core.Domain.Authors.Common;
 
 internal class AuthorsRepository(LibraryDbContext dbContext) : IAuthorsRepository
 {

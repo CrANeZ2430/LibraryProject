@@ -3,7 +3,7 @@ using Library.Core.Domain.Books.Models;
 using Library.Persistence.LibraryDb;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.Infrastructure.Core.Domain;
+namespace Library.Infrastructure.Core.Domain.Books.Common;
 
 internal class BooksRepository(LibraryDbContext dbContext) : IBooksRepository
 {

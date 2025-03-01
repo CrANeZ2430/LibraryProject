@@ -1,8 +1,11 @@
 ﻿using Library.Core.Common.DbContext;
+using Library.Core.Domain.Authors.Checkers;
 using Library.Core.Domain.Authors.Common;
 using Library.Core.Domain.Books.Common;
 using Library.Infrastructure.Core.Common;
-using Library.Infrastructure.Core.Domain;
+using Library.Infrastructure.Core.Domain.Authors.Checkers;
+using Library.Infrastructure.Core.Domain.Authors.Common;
+using Library.Infrastructure.Core.Domain.Books.Common;
 using Library.Infrastructure.Middleware.ExceptionHandler;
 using Library.Infrastructure.Middleware.Response;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +22,8 @@ public static class InfrastructureRegistration
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IBooksRepository, BooksRepository>();
         services.AddScoped<IAuthorsRepository, AuthorsRepository>();
+
+        services.AddScoped<IEmailMustBeUniqueChecker, EmailMustBeUniqueChecker>();
 
         services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
         services.AddTransient<ExceptionHandlerMiddleware>();
