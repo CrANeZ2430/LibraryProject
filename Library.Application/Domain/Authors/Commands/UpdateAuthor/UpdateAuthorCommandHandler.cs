@@ -10,11 +10,17 @@ public class UpdateAuthorCommandHandler(
     IUnitOfWork unitOfWork) : IRequestHandler<UpdateAuthorCommand>
 {
     public async Task Handle(
-        UpdateAuthorCommand request, 
+        UpdateAuthorCommand command, 
         CancellationToken cancellationToken)
     {
-        var author = await authorsRepository.GetById(request.AuthorId, cancellationToken);
-        var data = new UpdateAuthorData(request.FirstName, request.LastName, request.Email);
+        var author = await authorsRepository.GetById(command.AuthorId, cancellationToken);
+        var data = new UpdateAuthorData(
+            command.FirstName, 
+            command.LastName, 
+            command.MiddleName, 
+            command.Email, 
+            command.Phone);
+
         author.Update(data);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }

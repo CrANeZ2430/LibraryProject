@@ -10,7 +10,9 @@ public class AssignAuthorsCommandHandler(
     IBooksRepository booksRepository,
     IAuthorsRepository authorsRepository) : IRequestHandler<AssignAuthorsCommand>
 {
-    public async Task Handle(AssignAuthorsCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        AssignAuthorsCommand request, 
+        CancellationToken cancellationToken)
     {
         var book = await booksRepository.GetById(request.BookId, cancellationToken);
         var authors = await authorsRepository.GetByIds(request.AuthorIds, cancellationToken);

@@ -4,4 +4,6 @@ public record UpdateAuthorRequest(
     Guid AuthorId,
     string FirstName,
     string LastName,
-    string Email);
+    string MiddleName,
+    string Email,
+    string Phone);

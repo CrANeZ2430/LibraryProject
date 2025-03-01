@@ -6,7 +6,9 @@ public class BookAuthor
 {
     private BookAuthor() { }
 
-    private BookAuthor(Guid animalId, Guid ownerId)
+    private BookAuthor(
+        Guid animalId, 
+        Guid ownerId)
     {
         BookId = animalId;
         AuthorId = ownerId;

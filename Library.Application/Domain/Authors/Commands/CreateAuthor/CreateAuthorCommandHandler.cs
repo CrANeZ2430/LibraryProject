@@ -17,7 +17,13 @@ public class CreateAuthorCommandHandler(
         CreateAuthorCommand command, 
         CancellationToken cancellationToken)
     {
-        var data = new CreateAuthorData(command.FirstName, command.LastName, command.Email);
+        var data = new CreateAuthorData(
+            command.FirstName, 
+            command.LastName, 
+            command.MiddleName, 
+            command.Email, 
+            command.Phone);
+
         var author = await Author.Create(data, emailMustBeUniqueChecker);
         authorsRepository.Add(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);

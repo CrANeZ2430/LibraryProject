@@ -3,4 +3,6 @@
 public record UpdateAuthorData(
     string FirstName,
     string LastName,
-    string Email);
+    string MiddleName,
+    string Email,
+    string Phone);

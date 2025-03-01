@@ -11,15 +11,22 @@ internal class AuthorsEntityTypeConfiguration : IEntityTypeConfiguration<Author>
         builder.HasKey(x => x.Id);
 
         builder.Property(x => x.FirstName)
-            .HasMaxLength(20)
+            .HasMaxLength(50)
             .IsRequired();
 
         builder.Property(x => x.LastName)
-            .HasMaxLength(20)
+            .HasMaxLength(50)
             .IsRequired();
+
+        builder.Property(x => x.MiddleName)
+            .HasMaxLength(50);
 
         builder.Property(x => x.Email)
             .HasMaxLength(50)
+            .IsRequired();
+
+        builder.Property(x => x.Phone)
+            .HasMaxLength(20)
             .IsRequired();
 
         builder.Metadata

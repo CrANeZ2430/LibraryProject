@@ -8,7 +8,9 @@ public class DeleteBookCommandHandler(
     IBooksRepository booksRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<DeleteBookCommand>
 {
-    public async Task Handle(DeleteBookCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        DeleteBookCommand request, 
+        CancellationToken cancellationToken)
     {
         var book = await booksRepository.GetById(request.BookId, cancellationToken);
         booksRepository.Delete(book);

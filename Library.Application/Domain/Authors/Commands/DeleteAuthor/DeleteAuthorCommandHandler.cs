@@ -8,9 +8,11 @@ class DeleteAuthorCommandHandler(
     IAuthorsRepository authorsRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<DeleteAuthorCommand>
 {
-    public async Task Handle(DeleteAuthorCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        DeleteAuthorCommand command, 
+        CancellationToken cancellationToken)
     {
-        var author = await authorsRepository.GetById(request.AuthorId, cancellationToken);
+        var author = await authorsRepository.GetById(command.AuthorId, cancellationToken);
         authorsRepository.Delete(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }

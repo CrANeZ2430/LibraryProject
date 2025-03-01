@@ -10,7 +10,10 @@ public class Book : Entity
     private readonly List<BookAuthor> _authors = new();
     private Book() { }
 
-    public Book(Guid id, string title, string description)
+    public Book(
+        Guid id, 
+        string title, 
+        string description)
     {
         Id = id;
         Title = title;

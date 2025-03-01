@@ -34,7 +34,9 @@ public class AuthorsController(
         var command = new CreateAuthorCommand(
             request.FirstName,
             request.LastName,
-            request.Email);
+            request.MiddleName,
+            request.Email,
+            request.Phone);
 
         var id = await mediator.Send(command, cancellationToken);
         return Ok(id);
@@ -49,7 +51,9 @@ public class AuthorsController(
             request.AuthorId,
             request.FirstName,
             request.LastName,
-            request.Email);
+            request.MiddleName,
+            request.Email,
+            request.Phone);
 
         await mediator.Send(command, cancellationToken);
         return Ok();
