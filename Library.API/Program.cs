@@ -1,5 +1,6 @@
 using Library.Application;
 using Library.Infrastructure;
+using Library.Infrastructure.Middleware.Connection;
 using Library.Persistence.LibraryDb;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,4 +30,5 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseCustomExceptionHandler(app.Environment);
 app.Run();

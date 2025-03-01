@@ -23,4 +23,12 @@ internal class AuthorsRepository(LibraryDbContext dbContext) : IAuthorsRepositor
             .Include(x => x.Books)
             .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new InvalidOperationException($"{nameof(Author)} was not found");
     }
+
+    public async Task<IList<Author>> GetByIds(Guid[] ids, CancellationToken cancellationToken)
+    {
+        return await dbContext.Authors
+            .Include(x => x.Books)
+            .Where(x => ids.Contains(x.Id))
+            .ToListAsync(cancellationToken);
+    }
 }

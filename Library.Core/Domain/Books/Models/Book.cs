@@ -1,9 +1,11 @@
-﻿using Library.Core.Domain.Authors.Models;
+﻿using Library.Core.Common.Validation;
+using Library.Core.Domain.Authors.Models;
 using Library.Core.Domain.Books.Data;
+using Library.Core.Domain.Books.Validators;
 
 namespace Library.Core.Domain.Books.Models;
 
-public class Book
+public class Book : Entity
 {
     private readonly List<BookAuthor> _authors = new();
     private Book() { }
@@ -20,21 +22,43 @@ public class Book
     public string Description { get; private set; }
     public IReadOnlyCollection<BookAuthor> Authors => _authors.AsReadOnly();
 
-    public static Book Create(CreateBookData data)
+    public static async Task<Book> Create(CreateBookData data)
     {
+        await ValidateAsync(new CreateBookDataValidator(), data);
+
         return new Book(
             Guid.NewGuid(), 
             data.Title, 
             data.Description);
     }
 
-    public void AssignAuthor(Author author)
+    public void Update(UpdateBookData data)
     {
-        if (_authors.Any(x => x.AuthorId == author.Id))
-        {
-            return;
-        }
+        Title = data.Title;
+        Description = data.Description;
+    }
 
-        _authors.Add(BookAuthor.Create(Id, author.Id));
+    //public void AssignAuthor(Author author)
+    //{
+    //    if (_authors.Any(x => x.AuthorId == author.Id))
+    //    {
+    //        return;
+    //    }
+
+    //    _authors.Add(BookAuthor.Create(Id, author.Id));
+    //}
+
+    // Finish this method
+    public void AssignAuthors(IList<Author> authors)
+    {
+        foreach (var author in authors)
+            _authors.Add(BookAuthor.Create(Id, author.Id));
+    }
+
+    // Finish this method
+    public void RemoveAuthors(IList<Author> authors)
+    {
+        foreach (var author in authors)
+            _authors.Remove(_authors.First(x => x.AuthorId == author.Id));
     }
 }

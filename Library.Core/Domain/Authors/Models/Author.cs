@@ -31,4 +31,11 @@ public class Author
             data.LastName,
             data.Email);
     }
+
+    public void Update(UpdateAuthorData data)
+    {
+        FirstName = data.FirstName;
+        LastName = data.LastName;
+        Email = data.Email;
+    }
 }

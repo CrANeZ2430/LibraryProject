@@ -3,18 +3,20 @@ using Library.Core.Domain.Authors.Common;
 using Library.Core.Domain.Books.Common;
 using MediatR;
 
-namespace Library.Application.Domain.Books.Commands.AssignAuthors;
+namespace Library.Application.Domain.Books.Commands.RemoveAuthors;
 
-public class AssignAuthorsCommandHandler(
-    IUnitOfWork unitOfWork,
+public class RemoveAuthorsCommandHandler(
+    IAuthorsRepository authorsRepository,
     IBooksRepository booksRepository,
-    IAuthorsRepository authorsRepository) : IRequestHandler<AssignAuthorsCommand>
+    IUnitOfWork unitOfWork) : IRequestHandler<RemoveAuthorsCommand>
 {
-    public async Task Handle(AssignAuthorsCommand request, CancellationToken cancellationToken)
+    public async Task Handle(
+        RemoveAuthorsCommand request, 
+        CancellationToken cancellationToken)
     {
         var book = await booksRepository.GetById(request.BookId, cancellationToken);
         var authors = await authorsRepository.GetByIds(request.AuthorIds, cancellationToken);
-        book.AssignAuthors(authors);
+        book.RemoveAuthors(authors);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

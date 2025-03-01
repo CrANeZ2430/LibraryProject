@@ -1,4 +1,4 @@
-﻿namespace Library.Core.Common;
+﻿namespace Library.Core.Common.DbContext;
 
 public interface IUnitOfWork
 {

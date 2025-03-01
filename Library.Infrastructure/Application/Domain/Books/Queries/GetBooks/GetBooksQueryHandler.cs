@@ -4,7 +4,7 @@ using Library.Persistence.LibraryDb;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Library.Infrastructure.Application.Domain.Books.Queries.GetAnimals;
+namespace Library.Infrastructure.Application.Domain.Books.Queries.GetBooks;
 
 public class GetBooksQueryHandler(
     LibraryDbContext dbContext) 

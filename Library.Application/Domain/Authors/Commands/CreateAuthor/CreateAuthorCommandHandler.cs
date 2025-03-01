@@ -1,4 +1,4 @@
-﻿using Library.Core.Common;
+﻿using Library.Core.Common.DbContext;
 using Library.Core.Domain.Authors.Common;
 using Library.Core.Domain.Authors.Data;
 using Library.Core.Domain.Authors.Models;
@@ -17,7 +17,6 @@ public class CreateAuthorCommandHandler(
     {
         var data = new CreateAuthorData(command.FirstName, command.LastName, command.Email);
         var author = Author.Create(data);
-
         authorsRepository.Add(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return author.Id;

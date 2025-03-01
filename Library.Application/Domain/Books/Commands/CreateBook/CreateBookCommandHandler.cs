@@ -1,4 +1,4 @@
-﻿using Library.Core.Common;
+﻿using Library.Core.Common.DbContext;
 using Library.Core.Domain.Books.Common;
 using Library.Core.Domain.Books.Data;
 using Library.Core.Domain.Books.Models;
@@ -15,8 +15,7 @@ public class CreateBookCommandHandler(
         CancellationToken cancellationToken)
     {
         var data = new CreateBookData(command.Title, command.Description);
-        var book = Book.Create(data);
-
+        var book = await Book.Create(data);
         booksRepository.Add(book);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return book.Id;
