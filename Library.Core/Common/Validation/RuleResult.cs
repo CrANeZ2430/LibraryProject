@@ -30,18 +30,6 @@ public class RuleResult
         return new RuleResult(false, errors);
     }
 
-    public static RuleResult Failed(List<string> errors)
-    {
-        return new RuleResult(false, errors);
-    }
-
-    public static RuleResult Determine(List<string> errors)
-    {
-        var isSuccess = errors.All(string.IsNullOrWhiteSpace);
-        errors = isSuccess ? new List<string>() : errors;
-        return new RuleResult(isSuccess, errors);
-    }
-
     public static RuleResult Determine(params string[] errors)
     {
         var isSuccess = errors.All(string.IsNullOrWhiteSpace);

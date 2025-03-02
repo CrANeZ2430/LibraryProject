@@ -5,6 +5,6 @@ namespace Library.Application.Domain.Authors.Commands.CreateAuthor;
 public record CreateAuthorCommand(
     string FirstName,
     string LastName,
-    string MiddleName,
+    string? MiddleName,
     string Email,
     string PhoneNumber) : IRequest<Guid>;

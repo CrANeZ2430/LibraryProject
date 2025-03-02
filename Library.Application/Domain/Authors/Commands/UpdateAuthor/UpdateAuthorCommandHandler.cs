@@ -17,7 +17,7 @@ public class UpdateAuthorCommandHandler(
         var data = new UpdateAuthorData(
             command.FirstName, 
             command.LastName, 
-            command.MiddleName, 
+            command.MiddleName!, 
             command.Email, 
             command.PhoneNumber);
 

@@ -36,9 +36,12 @@ public class Author : Entity
     public string PhoneNumber { get; private set; }
     public IReadOnlyCollection<BookAuthor> Books => _books.AsReadOnly();
 
-    public static async Task<Author> Create(CreateAuthorData data, IEmailMustBeUniqueChecker emailMustBeUniqueChecker)
+    public static async Task<Author> Create(
+        CreateAuthorData data, 
+        IEmailMustBeUniqueChecker emailMustBeUniqueChecker,
+        IPhoneMustBeUniqueChecker phoneMustBeUniqueChecker)
     {
-        await ValidateAsync(new CreateAuthorDataValidator(emailMustBeUniqueChecker), data);
+        await ValidateAsync(new CreateAuthorDataValidator(emailMustBeUniqueChecker, phoneMustBeUniqueChecker), data);
 
         return new Author(
             Guid.NewGuid(),

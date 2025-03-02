@@ -1,19 +1,22 @@
 ﻿using Library.Core.Common.Validation;
 using Library.Core.Domain.Authors.Checkers;
+using Library.Core.Domain.Authors.Models;
 
 namespace Library.Core.Domain.Authors.Rules;
 
 public class PhoneMustBeUniqueBusinessRule(
     string phoneNumber,
-    IPhoneMustBeUniqueChecker phoneMustBeUniqueChecker) : IBusinessRuleAsync
+    IPhoneMustBeUniqueChecker checker) : IBusinessRuleAsync
 {
-    public Task<RuleResult> CheckAsync(CancellationToken cancellationToken = default)
+    public async Task<RuleResult> CheckAsync(CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var isUnique = await checker.IsUnique(phoneNumber, cancellationToken);
+        return Check(isUnique);
     }
 
-    private void Check()
+    private RuleResult Check(bool isBelongs)
     {
-
+        if (isBelongs) return RuleResult.Success();
+        return RuleResult.Failed($"{nameof(Author)}'s {nameof(Author.Email)} must be unique.");
     }
 }
