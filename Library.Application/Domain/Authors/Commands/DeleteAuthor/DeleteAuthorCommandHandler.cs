@@ -13,7 +13,7 @@ class DeleteAuthorCommandHandler(
         CancellationToken cancellationToken)
     {
         var author = await authorsRepository.GetById(command.AuthorId, cancellationToken);
-        authorsRepository.Delete(author);
+        authorsRepository.Remove(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }

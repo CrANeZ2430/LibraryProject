@@ -2,6 +2,8 @@
 using Library.Core.Domain.Authors.Models;
 using Library.Core.Domain.Books.Data;
 using Library.Core.Domain.Books.Validators;
+using Library.Core.Exceptions;
+using System.Threading.Tasks;
 
 namespace Library.Core.Domain.Books.Models;
 
@@ -35,32 +37,26 @@ public class Book : Entity
             data.Description);
     }
 
-    public void Update(UpdateBookData data)
+    public async Task Update(UpdateBookData data)
     {
+        await ValidateAsync(new UpdateBookDataValidator(), data);
+
         Title = data.Title;
         Description = data.Description;
     }
 
-    //public void AssignAuthor(Author author)
-    //{
-    //    if (_authors.Any(x => x.AuthorId == author.Id))
-    //    {
-    //        return;
-    //    }
-
-    //    _authors.Add(BookAuthor.Create(Id, author.Id));
-    //}
-
     // Finish this method
-    public void AssignAuthors(IList<Author> authors)
+    public void AssignAuthors(IEnumerable<Author> authors)
     {
         foreach (var author in authors)
             _authors.Add(BookAuthor.Create(Id, author.Id));
     }
 
     // Finish this method
-    public void RemoveAuthors(IList<Author> authors)
+    public async Task RemoveAuthors(IEnumerable<Author> authors)
     {
+        await ValidateAsync(new RemoveAuthorsDataValidator(), (authors, this));
+
         foreach (var author in authors)
             _authors.Remove(_authors.First(x => x.AuthorId == author.Id));
     }

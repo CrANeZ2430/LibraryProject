@@ -52,8 +52,13 @@ public class Author : Entity
             data.PhoneNumber);
     }
 
-    public void Update(UpdateAuthorData data)
+    public async Task Update(
+        UpdateAuthorData data,
+        IEmailMustBeUniqueChecker emailMustBeUniqueChecker,
+        IPhoneMustBeUniqueChecker phoneMustBeUniqueChecker)
     {
+        await ValidateAsync(new UpdateAuthorDataValidator(emailMustBeUniqueChecker, phoneMustBeUniqueChecker), data);
+
         FirstName = data.FirstName;
         LastName = data.LastName;
         MiddleName = data.MiddleName;

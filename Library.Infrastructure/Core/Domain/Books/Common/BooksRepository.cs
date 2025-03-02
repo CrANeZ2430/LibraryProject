@@ -1,5 +1,6 @@
 ﻿using Library.Core.Domain.Books.Common;
 using Library.Core.Domain.Books.Models;
+using Library.Core.Exceptions;
 using Library.Persistence.LibraryDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,6 +22,6 @@ internal class BooksRepository(LibraryDbContext dbContext) : IBooksRepository
     {
         return await dbContext.Books
             .Include(x => x.Authors)
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new InvalidOperationException($"{nameof(Book)} was not found");
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new NotFoundException($"{nameof(Book)} was not found");
     }
 }

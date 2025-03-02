@@ -1,5 +1,6 @@
 ﻿using Library.Core.Domain.Authors.Common;
 using Library.Core.Domain.Authors.Models;
+using Library.Core.Exceptions;
 using Library.Persistence.LibraryDb;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,7 +13,7 @@ internal class AuthorsRepository(LibraryDbContext dbContext) : IAuthorsRepositor
         dbContext.Add(author);
     }
 
-    public void Delete(Author author)
+    public void Remove(Author author)
     {
         dbContext.Remove(author);
     }
@@ -21,14 +22,19 @@ internal class AuthorsRepository(LibraryDbContext dbContext) : IAuthorsRepositor
     {
         return await dbContext.Authors
             .Include(x => x.Books)
-            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new InvalidOperationException($"{nameof(Author)} was not found");
+            .FirstOrDefaultAsync(x => x.Id == id, cancellationToken) ?? throw new NotFoundException($"{nameof(Author)} was not found.");
     }
 
-    public async Task<IList<Author>> GetByIds(Guid[] ids, CancellationToken cancellationToken)
+    public async Task<IEnumerable<Author>> GetByIds(Guid[] ids, CancellationToken cancellationToken)
     {
-        return await dbContext.Authors
+       var authors = await dbContext.Authors
             .Include(x => x.Books)
             .Where(x => ids.Contains(x.Id))
-            .ToListAsync(cancellationToken);
+            .ToArrayAsync(cancellationToken);
+
+        if (authors.Length != ids.Length)
+            throw new NotFoundException($"{nameof(Author)} or more was not found.");
+
+        return authors;
     }
 }
