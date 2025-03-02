@@ -17,7 +17,10 @@ public class UpdateAuthorCommandHandler(
         UpdateAuthorCommand command,
         CancellationToken cancellationToken)
     {
-        var author = await authorsRepository.GetById(command.AuthorId, cancellationToken);
+        var author = await authorsRepository.GetById(
+            command.AuthorId, 
+            cancellationToken);
+
         var data = new UpdateAuthorData(
             command.FirstName, 
             command.LastName, 

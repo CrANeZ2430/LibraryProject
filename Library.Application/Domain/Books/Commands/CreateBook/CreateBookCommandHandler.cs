@@ -8,13 +8,17 @@ namespace Library.Application.Domain.Books.Commands.CreateBook;
 
 public class CreateBookCommandHandler(
     IUnitOfWork unitOfWork,
-    IBooksRepository booksRepository) : IRequestHandler<CreateBookCommand, Guid>
+    IBooksRepository booksRepository) 
+    : IRequestHandler<CreateBookCommand, Guid>
 {
     public async Task<Guid> Handle(
         CreateBookCommand command, 
         CancellationToken cancellationToken)
     {
-        var data = new CreateBookData(command.Title, command.Description);
+        var data = new CreateBookData(
+            command.Title, 
+            command.Description);
+
         var book = await Book.Create(data);
         booksRepository.Add(book);
         await unitOfWork.SaveChangesAsync(cancellationToken);

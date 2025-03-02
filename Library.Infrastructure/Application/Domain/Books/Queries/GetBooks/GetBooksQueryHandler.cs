@@ -31,7 +31,11 @@ public class GetBooksQueryHandler(
                 x.Id,
                 x.Title,
                 x.Description,
-                x.Authors.Select(o => new AuthorDto(o.Author.FirstName, o.Author.LastName)).ToArray()
+                x.Authors
+                .Select(o => new AuthorDto(
+                    o.Author.FirstName, 
+                    o.Author.LastName))
+                .ToArray()
                 ))
             .ToArrayAsync(cancellationToken);
 

@@ -6,13 +6,17 @@ namespace Library.Application.Domain.Books.Commands.DeleteBook;
 
 public class DeleteBookCommandHandler(
     IBooksRepository booksRepository,
-    IUnitOfWork unitOfWork) : IRequestHandler<DeleteBookCommand>
+    IUnitOfWork unitOfWork) 
+    : IRequestHandler<DeleteBookCommand>
 {
     public async Task Handle(
         DeleteBookCommand request, 
         CancellationToken cancellationToken)
     {
-        var book = await booksRepository.GetById(request.BookId, cancellationToken);
+        var book = await booksRepository.GetById(
+            request.BookId, 
+            cancellationToken);
+
         booksRepository.Delete(book);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }

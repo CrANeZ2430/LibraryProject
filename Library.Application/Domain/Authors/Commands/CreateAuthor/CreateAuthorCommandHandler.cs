@@ -25,7 +25,11 @@ public class CreateAuthorCommandHandler(
             command.Email,
             command.PhoneNumber);
 
-        var author = await Author.Create(data, emailMustBeUniqueChecker, phoneMustBeUniqueChecker);
+        var author = await Author.Create(
+            data, 
+            emailMustBeUniqueChecker, 
+            phoneMustBeUniqueChecker);
+
         authorsRepository.Add(author);
         await unitOfWork.SaveChangesAsync(cancellationToken);
         return author.Id;

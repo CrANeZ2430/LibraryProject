@@ -46,18 +46,19 @@ public class Book : Entity
     }
 
     // Finish this method
-    public void AssignAuthors(IEnumerable<Author> authors)
+    public async Task AssignAuthors(AssignAuthorsData data)
     {
-        foreach (var author in authors)
+        await ValidateAsync(new AssignAuthorsDataValidator(), data);
+
+        foreach (var author in data.Authors)
             _authors.Add(BookAuthor.Create(Id, author.Id));
     }
 
-    // Finish this method
-    public async Task RemoveAuthors(IEnumerable<Author> authors)
+    public async Task RemoveAuthors(RemoveAuthorsData data)
     {
-        await ValidateAsync(new RemoveAuthorsDataValidator(), (authors, this));
+        await ValidateAsync(new RemoveAuthorsDataValidator(), data);
 
-        foreach (var author in authors)
+        foreach (var author in data.Authors)
             _authors.Remove(_authors.First(x => x.AuthorId == author.Id));
     }
 }

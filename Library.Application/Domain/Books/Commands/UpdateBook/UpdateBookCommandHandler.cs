@@ -7,15 +7,22 @@ namespace Library.Application.Domain.Books.Commands.UpdateBook;
 
 public class UpdateBookCommandHandler(
     IBooksRepository booksRepository,
-    IUnitOfWork unitOfWork) : IRequestHandler<UpdateBookCommand>
+    IUnitOfWork unitOfWork) 
+    : IRequestHandler<UpdateBookCommand>
 {
     public async Task Handle(
         UpdateBookCommand request, 
         CancellationToken cancellationToken)
     {
-        var book = await booksRepository.GetById(request.BookId, cancellationToken);
-        var data = new UpdateBookData(request.Title, request.Description);
-        book.Update(data);
+        var book = await booksRepository.GetById(
+            request.BookId, 
+            cancellationToken);
+
+        var data = new UpdateBookData(
+            request.Title, 
+            request.Description);
+
+        await book.Update(data);
         await unitOfWork.SaveChangesAsync(cancellationToken);
     }
 }
