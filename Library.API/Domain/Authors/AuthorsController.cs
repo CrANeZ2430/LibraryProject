@@ -11,7 +11,6 @@ using System.ComponentModel.DataAnnotations;
 namespace Library.API.Domain.Authors;
 
 [Route(Routes.Authors)]
-[ApiController]
 public class AuthorsController(
     IMediator mediator) : ControllerBase
 {
@@ -28,7 +27,7 @@ public class AuthorsController(
 
     [HttpPost]
     public async Task<IActionResult> CreateAuthor(
-        [FromBody][Required] CreateAuthorRequest request,
+        [FromQuery] CreateAuthorRequest request,
         CancellationToken cancellationToken)
     {
         var command = new CreateAuthorCommand(
@@ -44,7 +43,7 @@ public class AuthorsController(
 
     [HttpPut]
     public async Task<IActionResult> UpdateAuthor(
-        [FromBody][Required] UpdateAuthorRequest request,
+        [FromQuery] UpdateAuthorRequest request,
         CancellationToken cancellationToken)
     {
         var command = new UpdateAuthorCommand(

@@ -7,4 +7,4 @@ public record CreateAuthorCommand(
     string LastName,
     string MiddleName,
     string Email,
-    string Phone) : IRequest<Guid>;
+    string PhoneNumber) : IRequest<Guid>;

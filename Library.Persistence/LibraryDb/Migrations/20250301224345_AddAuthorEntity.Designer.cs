@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Library.Persistence.LibraryDb.Migrations
 {
     [DbContext(typeof(LibraryDbContext))]
-    [Migration("20250301215539_AddAuthorEntity")]
+    [Migration("20250301224345_AddAuthorEntity")]
     partial class AddAuthorEntity
     {
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace Library.Persistence.LibraryDb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");

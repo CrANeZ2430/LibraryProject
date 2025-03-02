@@ -13,9 +13,8 @@ using System.ComponentModel.DataAnnotations;
 namespace Library.API.Domain.Books;
 
 [Route(Routes.Books)]
-[ApiController]
 public class BooksController(
-IMediator mediator) : ControllerBase
+    IMediator mediator) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetBooks(

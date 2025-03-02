@@ -25,7 +25,7 @@ internal class AuthorsEntityTypeConfiguration : IEntityTypeConfiguration<Author>
             .HasMaxLength(50)
             .IsRequired();
 
-        builder.Property(x => x.Phone)
+        builder.Property(x => x.PhoneNumber)
             .HasMaxLength(20)
             .IsRequired();
 

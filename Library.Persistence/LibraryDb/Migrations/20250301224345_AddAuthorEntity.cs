@@ -21,7 +21,7 @@ namespace Library.Persistence.LibraryDb.Migrations
                     LastName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     MiddleName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
+                    PhoneNumber = table.Column<string>(type: "character varying(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {

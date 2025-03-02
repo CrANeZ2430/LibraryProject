@@ -5,4 +5,4 @@ public record UpdateAuthorData(
     string LastName,
     string MiddleName,
     string Email,
-    string Phone);
+    string PhoneNumber);

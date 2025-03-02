@@ -6,5 +6,5 @@ public record AuthorDto(
     string LastName,
     string MiddleName,
     string Email,
-    string Phone,
+    string PhoneNumber,
     BookDto[] Books);

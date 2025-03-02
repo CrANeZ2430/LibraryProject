@@ -22,7 +22,7 @@ public class CreateAuthorCommandHandler(
             command.LastName, 
             command.MiddleName, 
             command.Email, 
-            command.Phone);
+            command.PhoneNumber);
 
         var author = await Author.Create(data, emailMustBeUniqueChecker);
         authorsRepository.Add(author);

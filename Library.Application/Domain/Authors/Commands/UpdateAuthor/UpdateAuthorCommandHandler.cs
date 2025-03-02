@@ -19,7 +19,7 @@ public class UpdateAuthorCommandHandler(
             command.LastName, 
             command.MiddleName, 
             command.Email, 
-            command.Phone);
+            command.PhoneNumber);
 
         author.Update(data);
         await unitOfWork.SaveChangesAsync(cancellationToken);

@@ -48,7 +48,7 @@ namespace Library.Persistence.LibraryDb.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("character varying(20)");

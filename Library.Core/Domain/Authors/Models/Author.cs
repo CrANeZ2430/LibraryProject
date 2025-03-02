@@ -18,14 +18,14 @@ public class Author : Entity
         string lastName, 
         string middleName, 
         string email, 
-        string phone)
+        string phoneNumber)
     {
         Id = id;
         FirstName = firstName;
         LastName = lastName;
         MiddleName = middleName;
         Email = email;
-        Phone = phone;
+        PhoneNumber = phoneNumber;
     }
 
     public Guid Id { get; private set; }
@@ -33,7 +33,7 @@ public class Author : Entity
     public string LastName { get; private set; }
     public string? MiddleName { get; private set; }
     public string Email { get; private set; }
-    public string Phone { get; private set; }
+    public string PhoneNumber { get; private set; }
     public IReadOnlyCollection<BookAuthor> Books => _books.AsReadOnly();
 
     public static async Task<Author> Create(CreateAuthorData data, IEmailMustBeUniqueChecker emailMustBeUniqueChecker)
@@ -46,7 +46,7 @@ public class Author : Entity
             data.LastName,
             data.MiddleName,
             data.Email,
-            data.Phone);
+            data.PhoneNumber);
     }
 
     public void Update(UpdateAuthorData data)
@@ -55,6 +55,6 @@ public class Author : Entity
         LastName = data.LastName;
         MiddleName = data.MiddleName;
         Email = data.Email;
-        Phone = data.Phone;
+        PhoneNumber = data.PhoneNumber;
     }
 }

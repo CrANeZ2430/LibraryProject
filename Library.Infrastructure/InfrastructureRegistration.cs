@@ -24,6 +24,7 @@ public static class InfrastructureRegistration
         services.AddScoped<IAuthorsRepository, AuthorsRepository>();
 
         services.AddScoped<IEmailMustBeUniqueChecker, EmailMustBeUniqueChecker>();
+        services.AddScoped<IPhoneMustBeUniqueChecker, PhoneMustBeUniqueChecker>();
 
         services.AddSingleton<IExceptionToResponseMapper, ExceptionToResponseMapper>();
         services.AddTransient<ExceptionHandlerMiddleware>();

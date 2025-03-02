@@ -8,4 +8,4 @@ public record UpdateAuthorCommand(
     string MiddleName,
     string LastName,
     string Email,
-    string Phone) : IRequest;
+    string PhoneNumber) : IRequest;
