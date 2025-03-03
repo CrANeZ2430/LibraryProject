@@ -4,6 +4,6 @@ using Library.Core.Domain.Books.Models;
 namespace Library.Core.Domain.Books.Data;
 
 public record RemoveAuthorsData(
-    IEnumerable<Author> Authors,
+    IEnumerable<Author> AuthorsToRemove,
     IEnumerable<BookAuthor> BookAuthors,
     int Quantity);

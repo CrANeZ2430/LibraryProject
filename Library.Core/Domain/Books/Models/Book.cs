@@ -45,12 +45,11 @@ public class Book : Entity
         Description = data.Description;
     }
 
-    // Finish this method
     public async Task AssignAuthors(AssignAuthorsData data)
     {
         await ValidateAsync(new AssignAuthorsDataValidator(), data);
 
-        foreach (var author in data.Authors)
+        foreach (var author in data.AuthorsToAssign)
             _authors.Add(BookAuthor.Create(Id, author.Id));
     }
 
@@ -58,7 +57,7 @@ public class Book : Entity
     {
         await ValidateAsync(new RemoveAuthorsDataValidator(), data);
 
-        foreach (var author in data.Authors)
+        foreach (var author in data.AuthorsToRemove)
             _authors.Remove(_authors.First(x => x.AuthorId == author.Id));
     }
 }
