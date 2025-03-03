@@ -22,6 +22,12 @@ public class ExceptionToResponseMapper : IExceptionToResponseMapper
                     ex.Details,
                     ex.Message
                 }),
+            BadRequestException ex => new ExceptionResponse(
+            HttpStatusCode.BadRequest,
+            new
+            {
+                ex.Message
+            }),
             ValidationException ex => new ExceptionResponse(
                 HttpStatusCode.BadRequest,
                 new

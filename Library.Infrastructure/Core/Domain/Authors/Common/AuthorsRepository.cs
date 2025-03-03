@@ -1,5 +1,7 @@
-﻿using Library.Core.Domain.Authors.Common;
+﻿using FluentValidation.Results;
+using Library.Core.Domain.Authors.Common;
 using Library.Core.Domain.Authors.Models;
+using Library.Core.Domain.Books.Models;
 using Library.Core.Exceptions;
 using Library.Persistence.LibraryDb;
 using Microsoft.EntityFrameworkCore;
@@ -27,14 +29,17 @@ internal class AuthorsRepository(LibraryDbContext dbContext) : IAuthorsRepositor
 
     public async Task<IEnumerable<Author>> GetByIds(Guid[] ids, CancellationToken cancellationToken)
     {
+        if (ids.Distinct().Count() != ids.Count())
+            throw new BadRequestException($"Two identical {nameof(Author)}s cannot be added.");
+
        var authors = await dbContext.Authors
             .Include(x => x.Books)
             .Where(x => ids.Contains(x.Id))
             .ToArrayAsync(cancellationToken);
 
-        if (authors.Length != ids.Length)
+        if (authors.Length < ids.Length)
             throw new NotFoundException($"{nameof(Author)} or more was not found.");
 
-        return authors;
+            return authors;
     }
 }
