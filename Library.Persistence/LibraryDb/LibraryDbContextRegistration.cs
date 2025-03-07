@@ -6,7 +6,7 @@ namespace Library.Persistence.LibraryDb;
 
 public static class LibraryDbContextRegistration
 {
-    public static void RegisterAnimalsDbContext(this IServiceCollection services, IConfiguration configuration)
+    public static void RegisterLibraryDbContext(this IServiceCollection services, IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("LibraryDb");
 

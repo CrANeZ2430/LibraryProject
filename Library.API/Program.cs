@@ -13,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices();
-builder.Services.RegisterAnimalsDbContext(builder.Configuration);
+builder.Services.RegisterLibraryDbContext(builder.Configuration);
 
 var app = builder.Build();
 
