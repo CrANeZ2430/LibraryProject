@@ -20,8 +20,8 @@ public class BookAuthor
     public Guid AuthorId { get; private set; }
     public Author Author { get; private set; }
 
-    public static BookAuthor Create(Guid animalId, Guid ownerId)
+    public static BookAuthor Create(Guid bookId, Guid userId)
     {
-        return new BookAuthor(animalId, ownerId);
+        return new BookAuthor(bookId, userId);
     }
 }
