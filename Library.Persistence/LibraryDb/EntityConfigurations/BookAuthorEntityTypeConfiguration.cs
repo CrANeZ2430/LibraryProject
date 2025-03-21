@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Library.Persistence.LibraryDb.EntityConfigurations;
 
-class BookAuthorEntityTypeConfiguration : IEntityTypeConfiguration<BookAuthor>
+internal class BookAuthorEntityTypeConfiguration : IEntityTypeConfiguration<BookAuthor>
 {
     public void Configure(EntityTypeBuilder<BookAuthor> builder)
     {
