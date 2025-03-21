@@ -7,11 +7,11 @@ public class BookAuthor
     private BookAuthor() { }
 
     private BookAuthor(
-        Guid animalId, 
-        Guid ownerId)
+        Guid bookId, 
+        Guid userId)
     {
-        BookId = animalId;
-        AuthorId = ownerId;
+        BookId = bookId;
+        AuthorId = userId;
     }
 
     public Guid BookId { get; private set; }
